@@ -6,8 +6,15 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
+      - flesch_kinkaid_service
     environment:
       - DATABASE_URL=postgres://postgres:postgres@postgres/web
+    networks:
+      - default
+  flesch_kinkaid_service:
+    build: ./flesch_kinkaid_service
+    ports:
+      - "3001:3000"
     networks:
       - default
   postgres:

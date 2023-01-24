@@ -11,11 +11,8 @@ class LanguageService
   #  30 - 10 |   College graduate | Very difficult to read. Best understood by university graduates.
   #   10 - 0 |       Professional | Extremely difficult to read. Best understood by university graduates.
   def self.FleschKincaidScore(text)
-    score = Odyssey.flesch_kincaid_re(text, false)
-    return 100 if score > 100
-    return 0 if score < 0
-
-    score
+    result = HTTParty.post("http://flesch_kinkaid_service:3000", body: { text: text }.to_json, headers: { "Content-Type" => "application/json" })
+    result["fk"]
   end
 
   def self.LanguageTool(text)

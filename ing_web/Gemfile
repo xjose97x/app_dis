@@ -61,6 +61,8 @@ gem "odyssey"
 # Grammar, spelling, and style checker
 gem "languagetool"
 
+gem "httparty"
+
 group :development, :test do
   # Rubocop
   gem "rubocop-performance"
