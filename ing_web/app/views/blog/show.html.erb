@@ -1,0 +1,75 @@
+<% @btn_class = "btn btn-primary me-1" %>
+
+<%= button_to(
+    "Go back",
+    root_path,
+    method: :get,
+    class:@btn_class
+  )%>
+
+<h1><%= @post.title %></h1>
+
+<h3>Stats</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Author</th>
+            <th scope="col">Category</th>
+            <th scope="col">Tags</th>
+            <th scope="col">Flesch Kinkaid score</th>
+            <th scope="col">Grammar/Spelling errors</th>
+            <th scope="col">Liked by</th>
+            <th scope="col">Created at</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="#"><%= @post.author.full_name %></a></td>
+            <td><%= @post.category.title %></td>
+            <td>
+            <% @post.tags.each do |tag| %>
+                <a href="#" class="badge bg-primary"><%= tag.title %></a>
+            <% end %>
+            </td>
+            <td><%= @post.flesch_kincaid_score %></td>
+            <td>
+            <% @post.language_tool_matches.each do |match| %>
+                <ul>
+                    <li>
+                        ID: <% match["rule"]["id"] %>
+                        <ul>
+                            <li>Issue type: <%= match["rule"]["issue_type"] %></li>
+                            <li>Description: <%= match["rule"]["description"] %></li>
+                            <li>Short message: <%= match["short_message"] %></li>
+                            <li>Message: <%= match["message"] %></li>
+                            <li>Offset: <%= match["offset"] %></li>
+                            <li>Length: <%= match["length"] %></li>
+                            <li>Replacements: <%= match["replacements"].join(", ") %></li>
+                        </ul>
+                    </li>
+                </ul>
+            <% end %>
+            </td>
+            <td>
+                <% @post.liked_by.each do |user| %>
+                    <%= user.full_name %>
+                <% end %>
+            </td>
+            <td><%= @post.created_at %></td>
+        </tr>
+</table>
+
+<hr/>
+
+<h3>Content</h3>
+<% if current_user != @post.author %>
+    <%= form_with(url: "/blog/#{@post.id}/like", method: :post, local: true) do |form| %>
+        <% if @post.liked_by.include?(current_user)%>
+            <%= form.submit "Unlike", class: @btn_class %>
+        <% else %>
+            <%= form.submit "Like", class: @btn_class %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= @post.content %>

@@ -1,0 +1,325 @@
+require:
+  - "rubocop-performance"
+  - "rubocop-rails"
+
+AllCops:
+  NewCops: enable
+  UseCache: false
+  TargetRubyVersion: 3.0
+  # RuboCop has a bunch of cops enabled by default. This setting tells RuboCop
+  # to ignore them, so only the ones explicitly set in this file are enabled.
+  DisabledByDefault: true
+  Exclude:
+    - "bin/**/*"
+    - "tmp/**/*"
+    - "coverage/**/*"
+    - "scrap/**/*"
+    - "node_modules/**/*"
+    - "spec/fixtures/**/*"
+
+#
+# Performance
+#
+Performance:
+  Enabled: true
+
+Performance/CollectionLiteralInLoop:
+  Enabled: false
+#
+# Lint
+#
+Lint:
+  Enabled: true
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Lint/UselessAccessModifier:
+  Enabled: false
+
+Lint/SuppressedException:
+  Enabled: false
+
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/DuplicateElsifCondition:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/DuplicateBranch:
+  Enabled: false
+
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+
+Lint/DuplicateRescueException:
+  Enabled: true
+
+Lint/EmptyConditionalBody:
+  Enabled: true
+
+Lint/FloatComparison:
+  Enabled: true
+
+Lint/OutOfRangeRegexpRef:
+  Enabled: true
+
+Lint/SelfAssignment:
+  Enabled: true
+
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+
+Lint/UnreachableLoop:
+  Enabled: true
+
+#
+# Rails
+#
+Rails:
+  Enabled: true
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: true
+  Exclude:
+    - "spec/**/*"
+
+#
+# Metrics
+#
+Metrics/BlockLength:
+  Enabled: false
+
+#
+# Layout
+#
+Layout:
+  Enabled: true
+
+Layout/DotPosition:
+  Enabled: false
+
+Layout/BlockEndNewline:
+  Enabled: false
+
+Layout/MultilineBlockLayout:
+  Enabled: true
+  Exclude:
+    - "spec/**/*"
+
+Layout/LineLength:
+  Enabled: true
+  Max: 240
+  Exclude:
+    - "spec/**/*"
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+# Method definitions after `private` or `protected` isolated calls need one
+# extra level of indentation.
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: indented_internal_methods
+
+# Align `end` with the matching keyword or starting expression except for
+# assignments, where it should be aligned with the LHS.
+Layout/EndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: variable
+  AutoCorrect: true
+
+# Use `foo { bar }` not `foo {bar}`.
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+  EnforcedStyleForEmptyBraces: space
+
+#
+# Style
+#
+
+# Style:
+#   Enabled: true
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: true
+  Exclude:
+    - "spec/**/*"
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: true
+
+Style/RedundantInterpolation:
+  Enabled: true
+
+Style/RedundantParentheses:
+  Enabled: true
+
+Style/SafeNavigation:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: true
+
+Style/MutableConstant:
+  Enabled: true
+
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/EmptyElse:
+  Enabled: true
+
+Style/RedundantSort:
+  Enabled: true
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: true
+
+Style/RedundantSelf:
+  Enabled: true
+
+Style/WordArray:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: true
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
+
+Style/MissingRespondToMissing:
+  Enabled: false
+
+Style/CommentedKeyword:
+  Enabled: false
+
+Style/IdenticalConditionalBranches:
+  Enabled: true
+
+# Prefer &&/|| over and/or.
+Style/AndOr:
+  Enabled: true
+
+# Use Ruby >= 1.9 syntax for hashes. Prefer { a: :b } over { :a => :b }.
+Style/HashSyntax:
+  Enabled: true
+
+Style/DefWithParentheses:
+  Enabled: true
+
+# Defining a method with parameters needs parentheses.
+Style/MethodDefParentheses:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+  Exclude:
+    - "actionview/test/**/*.builder"
+    - "actionview/test/**/*.ruby"
+    - "actionpack/test/**/*.builder"
+    - "actionpack/test/**/*.ruby"
+    - "activestorage/db/migrate/**/*.rb"
+
+Style/RedundantFreeze:
+  Enabled: true
+  Exclude:
+    - "actionpack/lib/action_dispatch/journey/router/utils.rb"
+    - "activerecord/lib/active_record/connection_adapters/sqlite3_adapter.rb"
+
+# Check quotes usage according to lint rule below.
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+# Use quotes for string literals when they are enough.
+Style/RedundantPercentQ:
+  Enabled: true
+
+Style/ParenthesesAroundCondition:
+  Enabled: true
+
+Style/RedundantBegin:
+  Enabled: true
+
+Style/RedundantReturn:
+  Enabled: true
+  AllowMultipleReturnValues: true
+
+Style/Semicolon:
+  Enabled: true
+  AllowAsExpressionSeparator: true
+
+# Prefer Foo.method over Foo::method
+Style/ColonMethodCall:
+  Enabled: true
+
+Style/TrivialAccessors:
+  Enabled: true

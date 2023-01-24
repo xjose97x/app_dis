@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
+  before_action :configure_devise_permitted_parameters, if: :devise_controller?
+
+  private
+
+    def configure_devise_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :birth_date])
+    end
+
+    def after_sign_in_path_for(_resource)
+      users_path
+    end
+end

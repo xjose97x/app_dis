@@ -1,0 +1,30 @@
+<%= button_to(
+    "Go back",
+    root_path,
+    method: :get,
+    class:@btn_class
+  )%>
+
+<h1>New blog post</h1>
+
+<div>
+  <%= form_for @post, :url => "/blog", data: {turbo: false} do |form| %>
+    <div class="field">
+      <%= form.label :title %><br />
+      <%= form.text_field :title %>
+    </div>
+    <div class="field">
+      <%= form.label :category_id %><br />
+      <%= form.collection_select :category_id, @categories,:id,:title, include_blank: true %>
+    </div>
+    <div class="field">
+      <%= form.label :tags %><br />
+      <%= form.select :tags, options_for_select(@tags.collect{ |t| [t.title, t.id] }, 1 ), {prompt: '-Select-'}, :multiple => true %>
+    </div>
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.rich_text_area :content %>
+    </div>
+   <%= form.submit "Create" %>
+<% end %>
+</div>

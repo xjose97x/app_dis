@@ -1,0 +1,22 @@
+<h1>Usuario: <%= @user.full_name %> (<%= @user.id %>)</h1>
+<%= link_to "Regresar", users_path %>
+<table>
+<thead>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Email</th>
+    <th>Birth date</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><%= @user.first_name %></td>
+    <td><%= @user.last_name %></td>
+    <td><%= @user.email %></td>
+    <td><%= @user.birth_date %></td>
+    <td><%= link_to "Editar", edit_user_path(@user) %> <%= link_to "Eliminar", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "Estas seguro?" } %></td>
+  </tr>
+</tbody>
+</table>
